@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,6 +40,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+player = Player(room['outside'])
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +52,35 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while(True):
+    print(f"Currently you are in: {player.room.name}")
+    print(player.room.description)
+    choice = input("What would you like to do? {You can enter cardinal directions, N, S, W, E or press Q to leave the game}")
+
+    if (choice == "q"):
+        print("You have chosen to quit playing the game. See you next time!")
+        break
+    elif (choice == "n"):
+        try:
+            player.moveRoom(player.room.n_to)
+        except AttributeError:
+            print("You can't move N from this room, try a different direction")
+    elif (choice == "e"):
+        try:
+            player.moveRoom(player.room.e_to)
+        except AttributeError:
+            print("You can't move E from this room, try a different direction")
+    elif (choice == "w"):
+        try:
+            player.moveRoom(player.room.w_to)
+        except AttributeError:
+            print("You can't move W from this room, try a different direction")
+    elif (choice == "s"):
+        try:
+            player.moveRoom(player.room.s_to)
+        except AttributeError:
+            print("You can't move S from this room, try a different direction")
+    else:
+        print("You have entered an incorrect operator, please try again.")
+
